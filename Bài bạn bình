@@ -1,0 +1,21 @@
+#include<iostream>
+using namespace std;
+#define MAXBOX = 100;
+
+void nhapmang(int a[][MAXBOX], int H, int W) {
+	for (int i = 0; i < H; ++i) {
+		for (int j = 0; j < W; ++j) {
+			cin >> a[i][j];
+		}
+	}
+}
+int findmin(int a[][MAXBOX], int& min, int H, int W) {
+	min = a[0][0];
+	for (int i = 0; i < H; i++) {
+		for (int j = 0; j < W; j++) {
+			if (min > a[i][j])
+				min = a[i][j];
+		}
+	}
+	return min;
+}
