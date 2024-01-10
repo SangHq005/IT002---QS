@@ -1,15 +1,14 @@
 #include<iostream>
 using namespace std;
-#define MAXBOX = 100;
 
-void nhapmang(int a[][MAXBOX], int H, int W) {
+void nhapmang(int a[][100], int H, int W) {
 	for (int i = 0; i < H; ++i) {
 		for (int j = 0; j < W; ++j) {
 			cin >> a[i][j];
 		}
 	}
 }
-int findmin(int a[][MAXBOX], int& min, int H, int W) {
+int findmin(int a[][100], int& min, int H, int W) {
 	min = a[0][0];
 	for (int i = 0; i < H; i++) {
 		for (int j = 0; j < W; j++) {
@@ -18,4 +17,23 @@ int findmin(int a[][MAXBOX], int& min, int H, int W) {
 		}
 	}
 	return min;
+
+int numberofbox(int a[][100], int min, int H, int W) {
+		int count = 0;
+		for (int i = 0; i < H; i++) {
+			for (int j = 0; j < W; j++) {
+				if (min < a[i][j])
+					count += a[i][j] - min;
+			}
+		}
+	}
+int main() {
+		int H, W,min;
+		int a[100][100];
+		cin >> H >> W;
+		nhapmang(a, H, W);
+		findmin(a,min, H, W);
+		cout << numberofbox(a, min, H, W) << endl;
+		return 0;
+	}
 }
