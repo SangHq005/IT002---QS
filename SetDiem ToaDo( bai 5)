@@ -1,0 +1,65 @@
+#include <iostream>
+using namespace std;
+
+struct ToaDo {
+	double x;
+	double y;
+};
+void Nhap(ToaDo& A, int i) {
+	cout << "Nhap vao toa do x va y cua diem thu " << i << ":" << endl;
+	cin >> A.x >> A.y;
+}
+void Xuat(ToaDo A, ToaDo B) {
+	cout << "2 diem co khoang cach lon nhat: ";
+	cout << "(" << A.x << ',' << A.y << ")\t";
+	cout << "(" << B.x << ',' << B.y << ")\t";
+}
+double KhoangCach(ToaDo A, ToaDo B) {
+	return sqrt(pow((A.x - B.x), 2) + pow((A.y - B.y), 2));
+}
+void SetDiem(ToaDo& X, double x = 0, double y = 0) {
+	X.x=x;
+	X.y=y;
+}
+int main() {
+	int n;
+	cout << "Nhap vao so phan tu: "; cin >> n;
+	ToaDo* arr = new ToaDo[n];
+	for (int i = 0; i < n; i++) {
+		Nhap(arr[i], i);
+		double x; double y;
+		if (i % 3 == 0) {
+			cout << "Nhap x va y: ";
+			cin >> x >> y;
+			SetDiem(arr[i], x, y);
+		}
+		else if (i % 3 == 1) {
+			cout << "Chi nhap x: ";
+			cin >> x;
+			SetDiem(arr[i], x);
+		}
+		else if (i % 3 == 2) {
+			cout << "x = 0 va y = 0 ";
+			SetDiem(arr[i]);
+		}
+	}
+	cout << "Cac diem duoc nhap vao la: " << endl;
+	for (int i = 0; i < n; i++) {
+		cout << "diem thu" << i << "la: ";
+		cout << "(" << arr[i].x << ";" << arr[i].y<< ")" << endl;
+	}
+	int diem1 = 0;
+	int diem2 = 1;
+	double max = KhoangCach(arr[0], arr[1]);
+	for (int i = 0; i < n; i++) {
+		for (int j = i + 1; j < n; j++) {
+			if (max < KhoangCach(arr[i], arr[j])) {
+				max = KhoangCach(arr[i], arr[j]);
+				diem1 = i;
+				diem2 = j;
+			}
+		}
+	}
+	Xuat(arr[diem1], arr[diem2]);
+	return 0;
+}
