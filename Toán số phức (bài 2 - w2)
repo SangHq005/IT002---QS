@@ -1,0 +1,71 @@
+#include <iostream>
+using namespace std;
+
+class CSoPhuc {
+private:
+	double Phan_Thuc;
+	double Phan_Ao;
+public:
+	void Nhap();
+	void Xuat();
+	void Tong(CSoPhuc);
+	void Hieu(CSoPhuc);
+	void Tich(CSoPhuc);
+	void Thuong(CSoPhuc);
+};
+void CSoPhuc::Nhap() {
+	cout << "\nNhap vao phan thuc: ";
+	cin >> Phan_Thuc;
+	cout << "\nNhap vao phan ao: ";
+	cin >> Phan_Ao;
+}
+void CSoPhuc::Xuat() {
+	cout << Phan_Thuc  << " " << Phan_Ao;
+}
+void CSoPhuc::Tong(CSoPhuc sp) {
+	Phan_Thuc = Phan_Thuc + sp.Phan_Thuc;
+	Phan_Ao = Phan_Ao + sp.Phan_Ao;
+}
+void CSoPhuc::Hieu(CSoPhuc sp) {
+	Phan_Thuc = Phan_Thuc - sp.Phan_Thuc;
+	Phan_Ao = Phan_Ao - sp.Phan_Ao;
+}
+void CSoPhuc::Tich(CSoPhuc sp) {
+	Phan_Thuc = Phan_Thuc * sp.Phan_Thuc + Phan_Ao * sp.Phan_Ao;
+	Phan_Ao = Phan_Ao * sp.Phan_Thuc;
+}
+void CSoPhuc::Thuong(CSoPhuc sp) {
+	Phan_Thuc = (Phan_Thuc * sp.Phan_Thuc + Phan_Ao * sp.Phan_Ao) / (pow(Phan_Ao, 2) + pow(sp.Phan_Ao, 2));
+	Phan_Thuc = (Phan_Ao * sp.Phan_Thuc + Phan_Thuc * sp.Phan_Ao) / (pow(Phan_Ao, 2) + pow(sp.Phan_Ao, 2));
+}
+int main() {
+	CSoPhuc sp1, sp2;
+	cout << "Nhap vao so phuc thu 1: ";
+	sp1.Nhap();
+	cout << "\nNhap vao so phuc thu 2: ";
+	sp2.Nhap();
+	cout << "\n----------------------------------\n" << "Ket qua chuong trinh: " << endl;
+
+	cout << "Phep cong = ";
+	CSoPhuc cong;
+	cong = sp1;
+	cong.Tong(sp2);
+	cong.Xuat();
+
+	cout << "Phep tru = ";
+	CSoPhuc tru;
+	tru.Hieu(sp2);
+	tru.Xuat();
+
+	cout << "Phep nhan = ";
+	CSoPhuc nhan;
+	nhan.Tich(sp2);
+	nhan.Xuat();
+
+	cout << "Phep chia = ";
+	CSoPhuc chia;
+	chia.Thuong(sp2);
+	chia.Xuat();
+
+	return 0;
+}
