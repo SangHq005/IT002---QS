@@ -1,0 +1,44 @@
+#include <iostream>
+#include<cmath>
+using namespace std;
+
+struct Toa_Do {
+	double x;
+	double y;
+};
+void NhapToaDo(Toa_Do& A, int i) {
+		cout << "Nhap lan luot toa do x va y cua toa thu " << i << ":";
+		cin >> A.x >> A.y;
+}
+void XuatToaDo(Toa_Do X, Toa_Do Y) {
+	cout << "\n-----------------------------------------\n" << "Ket qua: " << endl;
+	cout << "2 diem co khoang cach lon nhat la: " << endl;
+	cout << "(" << X.x << ";" << X.y << ")\t";
+	cout << "(" << Y.x << ";" << Y.y << ")" << endl;
+	cout << "\n-----------------------------------------\n";
+}
+double KhoangCach(Toa_Do X, Toa_Do Y) {
+	return sqrt(pow((X.x - Y.x), 2) + pow((X.y - Y.y), 2));
+}
+int main() {
+	int n;
+	cout << "Nhap vao so phan tu: "; cin >> n;
+	Toa_Do* arr = new Toa_Do[n];
+	for (int i = 0; i < n; i++) {
+		NhapToaDo(arr[i], i);
+	}
+	int diem1 = 0;
+	int diem2 = 1;
+	double Max = KhoangCach(arr[0], arr[1]);
+	for (int i = 0; i < n; i++) {
+		for (int j = i + 1; j < n; j++) {
+			if (Max > KhoangCach(arr[i], arr[j])); {
+				Max = KhoangCach(arr[i], arr[j]);
+				diem1 = i;
+				diem2 = j;
+			}
+		}
+	}
+	XuatToaDo(arr[diem1], arr[diem2]);
+	return 0;
+}
