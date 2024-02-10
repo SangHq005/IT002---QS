@@ -1,0 +1,85 @@
+#include<iostream>
+#include <cmath>
+#include "header.h"
+using namespace std;
+
+class Diem {
+private:
+	double tung_do;
+	double hoanh_do;
+public:
+	Diem();
+	~Diem();
+	void Nhap();
+	void Xuat();
+	void Set(double x = 0, double y = 0);
+	double GetHoanh();
+	double GetTung();
+	void Tinhtien();
+	void Quay();
+};
+
+Diem::Diem() {
+
+}
+Diem::~Diem() {
+
+}
+void Diem::Nhap() {
+	cout << "Nhap vao hoanh do: ";
+	cin >> hoanh_do;
+	cout << "\nNhap vao tung do: ";
+	cin >> tung_do;
+}
+void Diem::Xuat() {
+	cout << "Toa do diem la :";
+	cout << "(" << hoanh_do << ";" << tung_do << ")";
+}
+void Diem::Set(double x, double y) {
+	hoanh_do = x;
+	tung_do = y;
+}
+double Diem::GetHoanh() {
+	return hoanh_do;
+}
+double Diem::GetTung() {
+	return tung_do;
+}
+void Diem::Tinhtien() {
+	Diem Diem_tt;
+	cout << "Nhap vao vector tinh tien : " << endl;
+	double x, y;
+	cin >> x >> y;
+	Diem_tt.hoanh_do = hoanh_do + x;
+	Diem_tt.tung_do = tung_do + y;
+	cout << "Diem sau khi tinh tien theo vecto (" << x << ";"
+		<<y<< ")\n";
+	cout << "(" << Diem_tt.hoanh_do << ";" << Diem_tt.tung_do << ")";
+}
+long long giaithua(int n) {
+	long long Giatrigiaithua = 1;
+	for (int i = 1; i <= n; i++) {
+		Giatrigiaithua = Giatrigiaithua * i;
+	}
+	return Giatrigiaithua;
+}
+void Diem::Quay() {
+	double GocQuay;
+	cout << "Nhap vao goc quay: ";
+	cin >> GocQuay;
+	double Bankinh = sqrt(pow(hoanh_do, 2) + pow(tung_do, 2));
+	hoanh_do = Bankinh * cos(GocQuay);
+	tung_do = Bankinh * sqrt(1 - pow(cos(GocQuay), 2));
+	cout << "Diem qua goc quay tam O goc quay " << GocQuay << "la: ";
+	cout << "(" << hoanh_do << ";" << tung_do << ")";
+}
+int main() {
+	Diem Toado;
+	Toado.Nhap();
+	Toado.Xuat();
+	cout << endl;
+	Toado.Tinhtien();
+	cout << endl;
+	Toado.Quay();
+	return 0;
+}
