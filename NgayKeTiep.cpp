@@ -1,42 +1,61 @@
-#include<iostream>
+#include <iostream>
 using namespace std;
-class CPhanSo {
+class CNgay {
 private:
-	int tu;
-	int mau;
+	int Ngay;
+	int Thang;
+	int Nam;
 public:
 	void Nhap();
 	void Xuat();
-	float SoSanh(CPhanSo,CPhanSo);
+	int ktNhuan();
+	CNgay NgayHomQua();
 };
-void CPhanSo::Nhap() {
-	cout << "\nNhap tu: ";
-	cin >> tu;
-	cout << "\nNhap mau: ";
-	cin >> mau;
+void CNgay::Nhap() {
+	cout << "\nNhap ngay: ";
+	cin >> Ngay;
+	cout << "\nNhap thang: ";
+	cin >> Thang;
+	cout << "\nNhap nam: ";
+	cin >> Nam;
 }
-void CPhanSo::Xuat() {
-	cout << "\nTu= " << tu;
-	cout << "\nMau= " << mau;
+void CNgay::Xuat() {
+	cout << "\tNgay: " << Ngay;
+	cout << "\tThang: " << Thang;
+	cout << "\tNam: " << Nam;
 }
-float CPhanSo::SoSanh(CPhanSo A, CPhanSo B) {
-	float a = (float)A.tu / A.mau;
-	float b = (float)B.tu / B.mau;
-	if (a > b)
+int CNgay::ktNhuan() {
+	if ((Nam % 4 == 0) && (Nam % 100 != 0))
 		return 1;
-	else
-		return -1;
+	if (Nam % 400 == 0)
+		return 1;
 	return 0;
 }
+CNgay CNgay::NgayHomQua() {
+	int NgayThang[12] = { 31,28,31,30,31,30,31,31,30,31,30,31 };
+	if (ktNhuan() == 1)
+		NgayThang[1] = 29;
+	++Ngay;
+	if (Ngay > NgayThang[Thang-1]) {
+		Thang++;
+		if (Thang > 12) {
+			Nam++;
+			Thang = 1;
+		}
+		Ngay = 1;
+	}
+	return *this;
+}
 int main() {
-	CPhanSo ps1, ps2;
-	ps1.Nhap();
-	ps2.Nhap();
-	float kq = ps1.SoSanh(ps1,ps2);
-	cout << "\nPhan so lon nhat la: ";
-	if ( kq>=0)
-		ps1.Xuat();
-	else
-		ps2.Xuat();
+	
+	CNgay ngay;
+	ngay.Nhap();
+	cout << "***--------------Ket qua chuong trinh--------------***"<< endl;
+	cout << "\tNgay Ban Dau: ";
+	ngay.Xuat();
+	cout << endl;
+	CNgay kq = ngay.NgayHomQua();
+	cout << "\tNgay Ke Tiep: ";
+	kq.Xuat();
 	return 1;
 }
